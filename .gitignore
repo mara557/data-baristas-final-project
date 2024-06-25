@@ -1,3 +1,4 @@
 *workspace*
 *.csv*
 *settings*
+*.pyc
