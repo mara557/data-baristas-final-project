@@ -11,13 +11,13 @@ CREATE TABLE purchase_information (
     time_of_purchase TIMESTAMP,
     location VARCHAR(255),
     total_paid DECIMAL(10,2),
-    payment_method VARCHAR(50)
+    payment_method VARCHAR(255)
 );
 
--- Create the items_ordered table
+-- Create the items_ordered table using SERIAL to simulate AUTO_INCREMENT
 CREATE TABLE items_ordered (
-    row_id AUTOINCREMENT PRIMARY KEY,
-    order_id VARCHAR(50),
+    row_id SERIAL PRIMARY KEY,
+    order_id VARCHAR(255),
     item_id VARCHAR(255),
     FOREIGN KEY (order_id) REFERENCES purchase_information(order_id),
     FOREIGN KEY (item_id) REFERENCES items(item_id)
