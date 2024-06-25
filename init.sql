@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS DB;
 -- Create the items table
 CREATE TABLE items (
     item_id VARCHAR(255) PRIMARY KEY,
