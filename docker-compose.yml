@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres_container
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      POSTGRES_DB: "${POSTGRES_DB}"
+      POSTGRES_USER: "${POSTGRES_USER}"
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data 
+
+  adminer:
+    image: adminer
+    container_name: adminer_container
+    restart: always
+    ports:
+      - 8080:8080
+
+volumes:
+  pgdata:
+
+# You will need to download postgress image using this command: docker pull postgres.
+# Then make sure you delete any conflicting containers that you may have in docker such as an existing adminer.
+# Then in wsl use this command to set up new container: docker-compose up -d
+# When accessing the database via adminer:
+# System: PostgreSQL
+# Server: db
+# Username: USER
+# Password: PASSWORD
