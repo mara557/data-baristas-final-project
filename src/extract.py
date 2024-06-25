@@ -2,7 +2,7 @@ import csv
 
 def reading_csv_files():
     try:
-        with open("leeds.csv", 'r') as file:
+        with open("data/leeds.csv", 'r') as file:
             csv_file = csv.DictReader(file)
             products_list = list(csv_file)
     except FileNotFoundError:
