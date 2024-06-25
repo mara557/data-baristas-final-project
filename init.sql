@@ -22,3 +22,12 @@ CREATE TABLE items_ordered (
     FOREIGN KEY (order_id) REFERENCES purchase_information(order_id),
     FOREIGN KEY (item_id) REFERENCES items(item_id)
 );
+
+
+"""
+        Copy these tables and insert them into your database
+        SQL command
+        DB: DB
+        Copy these tables, insert into SQL command
+        Execute
+"""
