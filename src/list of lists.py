@@ -1,29 +1,31 @@
 import remove_sensitive as rs
-import extract as ex
-# function to create list of lists for order information
-leeds_info = ex.reading_leeds_csv_files()
-expunged_leeds = rs.remove_pii(leeds_info)
-for row in expunged_leeds:
-    print(row)
-
-def create_order_list(dataset):
+import generate_uids as uids
+# function to create list of lists for order information 
+ 
+def create_order_list(list_of_ids, dataset):
+    expunged_data = rs.remove_pii(dataset)
     # Create an empty list to store order information
     purchase_information = []
-
-    # Create a sublist representing order details
-    order_sublist = [
-        list_of_ids,
-        time_of_purchase,
-        location,
-        total_paid,
-        payment_method       
-    ]
-
-    # Append the sub  list to the main list
-    purchase_information.append(order_sublist)
-
+    i = 0
+    for row in expunged_data:
+        order_id = list_of_ids[i]
+        time_of_purchase = row[0]
+        location = row[1]
+        total_paid = row[3]
+        payment_method = row[4]
+        order_sublist = [
+            order_id,
+            time_of_purchase,
+            location,
+            total_paid,
+            payment_method      
+        ]
+        i += 1
+ 
+        # Append the sub  list to the main list
+        purchase_information.append(order_sublist)
+ 
     # Return the list of order information
     return purchase_information
-
-
-
+ 
+ 
