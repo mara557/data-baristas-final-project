@@ -1,5 +1,3 @@
-
-
 # !!default i needs to be changed to something else if called again!!
 def generate_menu(list_items, i=0):
     items_name = []
@@ -16,6 +14,3 @@ def generate_menu(list_items, i=0):
             row = [product_id, item_name, price]
             items_db.append(row)
     return items_db
-
-
-
