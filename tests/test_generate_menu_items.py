@@ -2,10 +2,11 @@ from src.generate_menu_items import generate_menu
 
 def test_generate_menu():
     dummy_data = [
-        {"item_name": "Chocolate", "price": 2.30},
-        {"item_name": "Chocolate", "price": 2.30},
-        {"item_name": "Baked Beans", "price": 1.85},
-        {"item_name": "Tea", "price": 0.80}
+        ["item_id", "item_name", "price"],
+        [1, "Chocolate", 2.30],
+        [2, "Baked Beans", 1.85],
+        [3, "Tea", 0.80],
+        [4, "Tea", 0.80]
     ]
     
     expected = [
