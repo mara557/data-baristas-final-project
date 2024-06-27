@@ -1,4 +1,3 @@
-import extract as ex
 import hashlib as hl
 
 def generate_hashed_ids(to_hash):
