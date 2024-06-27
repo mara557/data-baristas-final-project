@@ -13,10 +13,3 @@ def hash_ids_list(dataset):
         list_of_ids.append(generate_hashed_ids(unique_to_hash))
     return list_of_ids
 
-# example usage below:
-leeds_data = ex.reading_leeds_csv_files()
-chesterfield_data = ex.reading_chesterfield_csv_files()
-
-leeds_ids = hash_ids_list(leeds_data)
-chesterfield_ids = hash_ids_list(chesterfield_data)
-
