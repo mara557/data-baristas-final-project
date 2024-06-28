@@ -3,7 +3,7 @@ import list_of_lists as lol
 import generate_menu_items as gmi
 import sql_utils as sql
 
-def main():
+def run():
     # Extract and process data
     item_data = isep.item_separation()
     order_info = lol.create_order_list()
@@ -42,4 +42,4 @@ def main():
     sql.load_items_ordered_into_table(items_ordered_data)
 
 if __name__ == "__main__":
-    main()
+    run()

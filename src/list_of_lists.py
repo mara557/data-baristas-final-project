@@ -3,7 +3,7 @@ import remove_sensitive as rs
 import generate_uids as uids
 from datetime import datetime
 
-# function to create list of lists for order information 
+
 def create_order_list(directory="data"):
     all_files_data = ex.reading_all_csv_files(directory)
     all_order_information = {}
@@ -12,7 +12,7 @@ def create_order_list(directory="data"):
         expunged_data = rs.remove_pii(dataset)
         ids_list = uids.hash_ids_list(dataset)
 
-        # Create an empty list to store order information
+
         purchase_information = []
         i = 0
         for row in expunged_data:
@@ -22,7 +22,7 @@ def create_order_list(directory="data"):
             total_paid = row[3]
             payment_method = row[4]
             
-            # Parse and format the date
+
             try:
                 time_of_purchase = datetime.strptime(time_of_purchase, "%d/%m/%Y %H:%M").strftime("%Y-%m-%d %H:%M:%S")
             except ValueError as e:
@@ -38,11 +38,11 @@ def create_order_list(directory="data"):
             ]
             i += 1
 
-            # Append the sub list to the main list
+
             purchase_information.append(order_sublist)
         
         file_name = filepath.split('/')[-1]
         all_order_information[file_name] = purchase_information
 
-    # Return the dictionary of order information for all files
+
     return all_order_information
