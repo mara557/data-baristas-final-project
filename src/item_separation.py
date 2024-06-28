@@ -11,10 +11,6 @@ def item_separation():
         file_name = filepath.split('/')[-1]
         all_data = rm.remove_pii(data)
         
-        result = [
-            ["order_id", "item_name", "price"]
-        ]
-
         dataset = []
         for row in all_data:
             if len(row) > 2:  # Ensure the row has the items column
@@ -22,6 +18,7 @@ def item_separation():
 
         ids_list = uids.hash_ids_list(dataset)
 
+        result = []
         for order_index, row in zip(ids_list, dataset):
             items = row[2].split(", ")
             for item in items:
@@ -32,12 +29,3 @@ def item_separation():
     
     return all_results
 
-
-if __name__ == "__main__":
-    items = item_separation()
-    for city, city_items in items.items():
-        if city == "headers":
-            continue
-        print(f"City: {city}")
-        for item in city_items:
-            print(item)
