@@ -1,8 +1,9 @@
 import extract as ex
 import remove_sensitive as rs
 import generate_uids as uids
+from datetime import datetime
 
-# function to create list of lists for order information 
+
 def create_order_list(directory="data"):
     all_files_data = ex.reading_all_csv_files(directory)
     all_order_information = {}
@@ -10,8 +11,8 @@ def create_order_list(directory="data"):
     for filepath, dataset in all_files_data.items():
         expunged_data = rs.remove_pii(dataset)
         ids_list = uids.hash_ids_list(dataset)
-        print(ids_list)
-        # Create an empty list to store order information
+
+
         purchase_information = []
         i = 0
         for row in expunged_data:
@@ -20,6 +21,14 @@ def create_order_list(directory="data"):
             location = row[1]
             total_paid = row[3]
             payment_method = row[4]
+            
+
+            try:
+                time_of_purchase = datetime.strptime(time_of_purchase, "%d/%m/%Y %H:%M").strftime("%Y-%m-%d %H:%M:%S")
+            except ValueError as e:
+                print(f"Error parsing date '{time_of_purchase}': {e}")
+                continue
+            
             order_sublist = [
                 order_id,
                 time_of_purchase,
@@ -29,20 +38,11 @@ def create_order_list(directory="data"):
             ]
             i += 1
 
-            # Append the sub list to the main list
+
             purchase_information.append(order_sublist)
         
         file_name = filepath.split('/')[-1]
         all_order_information[file_name] = purchase_information
 
-    # Return the dictionary of order information for all files
-    return all_order_information
 
-if __name__ == "__main__":
-    orders = create_order_list()
-    for city, city_orders in orders.items():
-        print(f"City: {city}")
-        for order in city_orders:
-            print(order)
- 
- 
+    return all_order_information

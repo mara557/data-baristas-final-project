@@ -7,5 +7,3 @@ def remove_pii(dataset):
         expunged_data.append(row)
     return expunged_data
 
-
-    

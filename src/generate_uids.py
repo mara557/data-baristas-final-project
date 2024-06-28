@@ -9,6 +9,7 @@ def hash_ids_list(dataset):
     list_of_ids = []
     for row in dataset:
         unique_to_hash = row[0] + row[2]
-        list_of_ids.append(generate_hashed_ids(unique_to_hash))
+        hashed_uid = generate_hashed_ids(unique_to_hash)
+        list_of_ids.append(hashed_uid)
     return list_of_ids
 
