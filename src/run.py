@@ -1,12 +1,12 @@
 import item_separation as isep
-import list_of_lists as lol
+import purchase_separation as psep
 import generate_menu_items as gmi
 import sql_utils as sql
 
 def run():
     # Extract and process data
     item_data = isep.item_separation()
-    order_info = lol.create_order_list()
+    order_info = psep.create_order_list()
     
     # Combine all items from all files
     combined_items = []
