@@ -40,6 +40,7 @@ def load_menu_into_table(list_input):
                 add_sql = """
                 INSERT INTO items(item_id, item_name, price)
                 VALUES (%s, %s, %s)
+                ON CONFLICT (item_id) DO NOTHING
                 """
                 values = (product_id, name, price)
                 cursor.execute(add_sql, values)
@@ -60,6 +61,7 @@ def load_items_ordered_into_table(list_input):
                 add_sql = """
                 INSERT INTO items_ordered(order_id, item_id)
                 VALUES (%s, %s)
+                ON CONFLICT (order_id, item_id) DO NOTHING
                 """
                 values = (order_id, item_id)
                 cursor.execute(add_sql, values)
@@ -83,6 +85,7 @@ def load_purchase_information(list_input):
                 add_sql = """
                 INSERT INTO purchase_information(order_id, time_of_purchase, location, total_paid, payment_method)
                 VALUES (%s, %s, %s, %s, %s)
+                ON CONFLICT (order_id) DO NOTHING
                 """
                 values = (order_id, time_of_purchase, location, total_paid, payment_method)
                 cursor.execute(add_sql, values)
