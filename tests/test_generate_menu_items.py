@@ -2,7 +2,6 @@ from src.generate_menu_items import generate_menu
 
 def test_generate_menu():
     dummy_data = [
-        ["item_id", "item_name", "price"],
         [1, "Chocolate", 2.30],
         [2, "Baked Beans", 1.85],
         [3, "Tea", 0.80],
@@ -15,6 +14,5 @@ def test_generate_menu():
         ["P002", "Tea", 0.8]
     ]
     
-    result = generate_menu(dummy_data)
-    
+    result = generate_menu(dummy_data)[0]
     assert result == expected
