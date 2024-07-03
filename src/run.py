@@ -36,6 +36,21 @@ def run():
     for data in order_info.values():
         purchase_info_data.extend(data)
     
+    # Combine item orders with their corresponding purchase information
+    combined_data = []
+    for purchase in purchase_info_data:
+        order_id = purchase[0]
+        items = [item for item in items_ordered_data if item[0] == order_id]
+        for item in items:
+            combined_data.append({
+                "order_id": order_id,
+                "time_of_purchase": purchase[1],
+                "location": purchase[2],
+                "total_paid": purchase[3],
+                "payment_method": purchase[4],
+                "item_id": item[1]
+            })
+
     # Load data into the database
     sql.load_purchase_information(purchase_info_data)
     sql.load_menu_into_table(menu_data)
@@ -43,4 +58,3 @@ def run():
 
 if __name__ == "__main__":
     run()
-
