@@ -37,13 +37,16 @@ def load_menu_into_table(list_input):
             database=database_name,
         ) as connection:
             with connection.cursor() as cursor:
-                add_sql = """
-                INSERT INTO items(item_id, item_name, price)
-                VALUES (%s, %s, %s)
-                ON CONFLICT (item_id) DO NOTHING
-                """
-                values = (product_id, name, price)
-                cursor.execute(add_sql, values)
+                # Check if item already exists
+                cursor.execute("SELECT COUNT(*) FROM items WHERE item_name = %s AND price = %s", (name, price))
+                result = cursor.fetchone()
+                if result[0] == 0:
+                    add_sql = """
+                    INSERT INTO items(item_id, item_name, price)
+                    VALUES (%s, %s, %s)
+                    """
+                    values = (product_id, name, price)
+                    cursor.execute(add_sql, values)
 
 def load_items_ordered_into_table(list_input):
     for item in list_input:
@@ -61,7 +64,6 @@ def load_items_ordered_into_table(list_input):
                 add_sql = """
                 INSERT INTO items_ordered(order_id, item_id)
                 VALUES (%s, %s)
-                ON CONFLICT (order_id, item_id) DO NOTHING
                 """
                 values = (order_id, item_id)
                 cursor.execute(add_sql, values)
@@ -85,7 +87,6 @@ def load_purchase_information(list_input):
                 add_sql = """
                 INSERT INTO purchase_information(order_id, time_of_purchase, location, total_paid, payment_method)
                 VALUES (%s, %s, %s, %s, %s)
-                ON CONFLICT (order_id) DO NOTHING
                 """
                 values = (order_id, time_of_purchase, location, total_paid, payment_method)
                 cursor.execute(add_sql, values)
