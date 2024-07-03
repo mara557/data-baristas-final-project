@@ -1,7 +1,7 @@
 import src.generate_uids as gu
 
 def test_hash_ids_list():
-    dataset = [
+    mock_dataset = [
             ["05/09/2015 09:02", "E World", "Chips - 0.8, Ram Sandwich - 2.1", "CASH"],
             ["05/09/2015 09:05", "E World", "Swedish Fish - 1.15, Ketel One - 21", "CARD"],
             ["05/09/2015 09:06", "E World", "Icing Sugar - 20, Poppies - 15", "CARD"],
@@ -15,5 +15,5 @@ def test_hash_ids_list():
                 '301f9268be7a137d802db868',
                 'f4b3673a6adcac011f05093f',
                 'f7c8b8cfdb0e69108c2f4f7c']
-    result = gu.hash_ids_list(dataset)
+    result = gu.hash_ids_list(mock_dataset)
     assert result == expected
