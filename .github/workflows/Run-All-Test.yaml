@@ -1,4 +1,4 @@
-name: RunTestsAndProgram
+name: Run-Tests
 
 # When to run this job
 on: [push]
