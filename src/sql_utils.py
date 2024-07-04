@@ -9,7 +9,7 @@ import os
 
 # Name of the environment variable which has the SSM parameter name as its value.
 # The SSM parameter name will be "<team name>_redshift_settings".
-ssm_env_var_name = 'data_baristas_redshift_settings'
+ssm_env_var_name = 'SSM_PARAMETER_NAME'
 
 def lambda_handler(event, context):
     print('lambda_handler: starting')
