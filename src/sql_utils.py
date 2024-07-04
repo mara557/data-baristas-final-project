@@ -1,8 +1,5 @@
 import os
 import psycopg2 as psy
-from dotenv import load_dotenv
-
-load_dotenv()
 
 from connect_to_db import *
 import os
