@@ -37,12 +37,16 @@ def load_menu_into_table(list_input):
             database=database_name,
         ) as connection:
             with connection.cursor() as cursor:
-                add_sql = """
-                INSERT INTO items(item_id, item_name, price)
-                VALUES (%s, %s, %s)
-                """
-                values = (product_id, name, price)
-                cursor.execute(add_sql, values)
+                # Check if item already exists
+                cursor.execute("SELECT COUNT(*) FROM items WHERE item_name = %s AND price = %s", (name, price))
+                result = cursor.fetchone()
+                if result[0] == 0:
+                    add_sql = """
+                    INSERT INTO items(item_id, item_name, price)
+                    VALUES (%s, %s, %s)
+                    """
+                    values = (product_id, name, price)
+                    cursor.execute(add_sql, values)
 
 def load_items_ordered_into_table(list_input):
     for item in list_input:

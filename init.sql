@@ -25,6 +25,11 @@ CREATE TABLE items_ordered (
 );
 
 
+
+
+
+
+
 """
         Copy these tables and insert them into your database
         SQL command
