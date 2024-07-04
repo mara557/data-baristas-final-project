@@ -24,12 +24,12 @@ def test_reading_all_csv_files(mock_csv_files):
     """Test reading_all_csv_files function with mocked CSV files"""
     directory = "data"
     expected_result = {
-        f"{directory}/file1.csv": [
+        f"file1.csv": [
             ["25/08/2021 09:00", "Testville", "John Doe", "Apple - 1.2, Banana - 0.5", "CARD", "1234432132143214"],
             ["25/08/2021 09:04", "Testville", "Steve Stevenson", "Hot Dog - 1.2, Half Grapefruit - 0.3", "CARD", "4233432232143214"],
             ["25/08/2021 09:04", "Testville", "Bjorn Bjornnson", "Pomegranate - 2.4, Whole Grapefruit - 0.5", "CASH", ""]
         ],
-        f"{directory}/file2.csv": [
+        f"file2.csv": [
             ["05/09/2015 09:02", "E World", "Sam Sepiol", "Chips - 0.8, Ram Sandwich - 2.1", "CASH", ""],
             ["05/09/2015 09:05", "E World", "Tyrell Wellick", "Swedish Fish - 1.15, Ketel One - 21", "CARD", "1234567809876543"],
             ["05/09/2015 09:06", "E World", "Darlene Alderson", "Icing Sugar - 20, Poppies - 15", "CARD", "1434567409876543"]
