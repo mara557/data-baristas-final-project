@@ -12,3 +12,4 @@ def reading_all_csv_files(directory="data"):
         except FileNotFoundError:
             print(f"File not found: {filepath}")
     return all_files_data
+
