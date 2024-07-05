@@ -2,3 +2,6 @@
 *.csv*
 *settings*
 *.pyc
+.aws-sam/
+get-pip.py
+template.yaml
