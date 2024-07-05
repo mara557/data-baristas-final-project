@@ -49,8 +49,28 @@ import item_separation as isep
 import purchase_separation as psep
 import generate_menu_items as gmi
 import sql_utils as sql
+import os
+from connect_to_db import *
+def run(event,context):
+    ssm_env_var_name = 'SSM_PARAMETER_NAME'
+    print('lambda_handler: starting')
 
-def run():
+    try:
+
+        ssm_param_name = os.environ[ssm_env_var_name] or 'NOT_SET'
+        print(f'lambda_handler: ssm_param_name={ssm_param_name} from ssm_env_var_name={ssm_env_var_name}')
+
+        # connection
+        redshift_details = get_ssm_param(ssm_param_name)
+        conn, cur = open_sql_database_connection_and_cursor(redshift_details)
+
+
+        print(f'lambda_handler: done')
+
+    except Exception as whoopsy:
+        # ...exception reporting
+        print(f'lambda_handler: failure, error=${whoopsy}')
+        raise whoopsy
     # Extract and process data
     item_data = isep.item_separation()
     order_info = psep.create_order_list()
@@ -61,7 +81,7 @@ def run():
         combined_items.extend(data)
 
     # Get the current max item_id from the database
-    current_max_id = sql.get_max_item_id() + 1
+    current_max_id = sql.get_max_item_id(conn=conn) + 1
 
     # Generate menu items data from the combined items
     menu_data, _ = gmi.generate_menu(combined_items, current_max_id)
@@ -99,9 +119,9 @@ def run():
             })
 
     # Load data into the database
-    sql.load_purchase_information(purchase_info_data)
-    sql.load_menu_into_table(menu_data)
-    sql.load_items_ordered_into_table(items_ordered_data)
+    sql.load_purchase_information(purchase_info_data, conn=conn)
+    sql.load_menu_into_table(menu_data, conn=conn)
+    sql.load_items_ordered_into_table(items_ordered_data, conn=conn)
 
 if __name__ == "__main__":
     run()
