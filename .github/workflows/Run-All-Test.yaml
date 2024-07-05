@@ -1,0 +1,29 @@
+name: Run-Tests
+
+# When to run this job
+on: [push]
+
+jobs:
+  build:
+    # Which operating system to test on - e.g. "macos-latest, ubuntu-latest, windows-latest"
+    runs-on: ubuntu-latest
+
+    # The steps to run in the job
+    steps:
+      # Checkout code from github
+      - name: Checkout-code
+        uses: actions/checkout@v3
+
+      # Install python
+      - name: Set-up-Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.10'
+
+      # Run pip to install all packages/dependencies
+      - name: Install-dependencies
+        run: pip install -r requirements.txt
+
+      # Run tests
+      - name: Run-Tests
+        run: python -m pytest
