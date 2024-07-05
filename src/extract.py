@@ -1,42 +1,20 @@
-<<<<<<< HEAD
-import csv
-import glob
+# !!default i needs to be changed to something else if called again!!
 
-def reading_all_csv_files(directory="data"):
-    """Reads all CSV files from the specified directory"""
-    all_files_data = {}
-    for filepath in glob.glob(f"{directory}/*.csv"):
-        try:
-            with open(filepath, 'r', encoding="UTF-8") as file:
-                csv_file = csv.reader(file)
-                all_files_data[filepath] = list(csv_file)
-        except FileNotFoundError:
-            print(f"File not found: {filepath}")
-    return all_files_data
 
-=======
-import csv
-import glob
-import os
-
-def reading_all_csv_files(directory="data"):
-    """Reads all CSV files from the specified directory and groups them by location, appending data from files with the same location."""
-    all_files_data = {}
-    
-    for filepath in glob.glob(f"{directory}/*.csv"):
-        try:
-            filename = os.path.basename(filepath)
-            location = filename.split('_')[0]  # Assuming the location is the first part of the filename
+def generate_menu(list_items, start_id=0):
+    items_name = []
+    items_db = []
+    i = start_id
+    for each_row in list_items:
+        if each_row[1] in items_name:
+            pass
+        else:
+            items_name.append(each_row[1])
+            item_name = each_row[1]
+            price = each_row[2]
+            product_id = f"P{str(i).zfill(3)}"
+            i += 1
+            row = [product_id, item_name, price]
+            items_db.append(row)
             
-            if location not in all_files_data:
-                all_files_data[location] = []
-            
-            with open(filepath, 'r', encoding="UTF-8") as file:
-                csv_file = csv.reader(file)
-                data = list(csv_file)
-                all_files_data[location].extend(data)
-        except FileNotFoundError:
-            print(f"File not found: {filepath}")
-    
-    return all_files_data
->>>>>>> faf0513afec6090b5f97c7f892ddad23f5175d7e
+    return items_db, i
