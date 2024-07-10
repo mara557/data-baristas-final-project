@@ -2,6 +2,12 @@
 *.csv*
 *settings*
 *.pyc
+*workspace*
+*.csv*
+*settings*
+*.pyc
 .aws-sam/
 get-pip.py
 template.yaml
+scratch.py
+

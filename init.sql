@@ -27,13 +27,3 @@ CREATE TABLE items_ordered (
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE items_ordered TO data_baristas_user;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE purchase_information TO data_baristas_user;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE items TO data_baristas_user;
-
-
-
-"""
-        Copy these tables and insert them into your database
-        SQL command
-        DB: DB
-        Copy these tables, insert into SQL command
-        Execute
-"""
