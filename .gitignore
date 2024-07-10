@@ -1,5 +1,12 @@
+<<<<<<< HEAD
+*workspace*
+*.csv*
+*settings*
+*.pyc
+=======
 *workspace*
 *.csv*
 *settings*
 *.pyc
 scratch.py
+>>>>>>> faf0513afec6090b5f97c7f892ddad23f5175d7e
