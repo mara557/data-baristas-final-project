@@ -3,8 +3,8 @@ import remove_sensitive as rm
 import generate_uids as uids  # Import the uids module to access hash_ids_list function
 
 """This is separating each item name and price in each order into a list of dictionaries from data folder."""
-def item_separation():
-    all_files_data = ex.reading_all_csv_files()
+def item_separation(bucket):
+    all_files_data = ex.reading_all_csv_files(bucket)
     
     all_results = {}
     for filepath, data in all_files_data.items():
@@ -28,4 +28,3 @@ def item_separation():
         all_results[file_name] = result
     
     return all_results
-
