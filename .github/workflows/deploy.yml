@@ -1,0 +1,27 @@
+name: Deploy via CloudFormation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: ${{ secrets.github-cicd-role }}
+        aws-region: us-west-1
+
+    - name: Deploy CloudFormation stack
+      run: |
+        aws cloudformation deploy \
+          --template-file infra/aws-infrastructure.yaml \
+          --stack-name data-baristas-stack \
+          --capabilities CAPABILITY_IAM

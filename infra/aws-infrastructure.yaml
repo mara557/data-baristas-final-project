@@ -1,0 +1,512 @@
+Metadata:
+  TemplateId: "arn:aws:cloudformation:eu-west-1:992382716453:generatedTemplate/8a3bb9c4-6b52-4793-a459-83a25be81beb"
+Parameters:
+  LambdaFunction00DataBaristas00hABORCodeS3KeyOneOfRfWIT:
+    NoEcho: "true"
+    Type: "String"
+    Description: "The Amazon S3 key of the deployment package.\nThis property can\
+      \ be replaced with other exclusive properties"
+  LambdaFunction00DataBaristas00hABORCodeS3BucketOneOfix04i:
+    NoEcho: "true"
+    Type: "String"
+    Description: "An Amazon S3 bucket in the same AWS-Region as your function. The\
+      \ bucket can be in a different AWS-account.\nThis property can be replaced with\
+      \ other exclusive properties"
+Resources:
+  CloudWatchAlarm00HighLambdaInvocations00BjtKn:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudWatch::Alarm"
+    DeletionPolicy: "Retain"
+    Properties:
+      ComparisonOperator: "GreaterThanThreshold"
+      TreatMissingData: "missing"
+      Dimensions:
+      - Value:
+          Ref: "LambdaFunction00DataBaristas00hABOR"
+        Name: "FunctionName"
+      Period: 300
+      EvaluationPeriods: 1
+      Namespace: "AWS/Lambda"
+      OKActions: []
+      AlarmActions:
+      - "arn:aws:sns:eu-west-1:992382716453:aws-controltower-SecurityNotifications"
+      MetricName: "Invocations"
+      ActionsEnabled: true
+      AlarmDescription: "Alert: Lambda function invoked more than 500 times in 5 minutes,\
+        \ indicating potential high usage."
+      AlarmName: "High Lambda Invocations"
+      Statistic: "Average"
+      InsufficientDataActions: []
+      DatapointsToAlarm: 1
+      Tags: []
+      Threshold: 1000
+  CloudWatchAlarm00DiskWriteWarning00uljNZ:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudWatch::Alarm"
+    DeletionPolicy: "Retain"
+    Properties:
+      ComparisonOperator: "GreaterThanThreshold"
+      TreatMissingData: "missing"
+      Dimensions:
+      - Value: "i-088d4b2ef2d6eb004"
+        Name: "InstanceId"
+      Period: 300
+      EvaluationPeriods: 1
+      Namespace: "AWS/EC2"
+      OKActions: []
+      AlarmActions:
+      - "arn:aws:sns:eu-west-1:992382716453:aws-controltower-SecurityNotifications"
+      MetricName: "DiskWriteOps"
+      ActionsEnabled: true
+      AlarmDescription: "Alert: High Disk Write Operations exceeding 1000 ops in 5\
+        \ minutes, indicating potential I/O bottlenecks."
+      AlarmName: "Disk Write Warning"
+      Statistic: "Average"
+      InsufficientDataActions: []
+      DatapointsToAlarm: 1
+      Tags: []
+      Threshold: 1000
+  EC2NetworkInterface00eni011df1d560966200200aozyC:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::NetworkInterface"
+    DeletionPolicy: "Retain"
+    Properties:
+      Description: ""
+      PrivateIpAddress: "10.0.0.48"
+      PrivateIpAddresses:
+      - PrivateIpAddress: "10.0.0.48"
+        Primary: true
+      SecondaryPrivateIpAddressCount: 0
+      Ipv6PrefixCount: 0
+      Ipv4Prefixes: []
+      Ipv4PrefixCount: 0
+      GroupSet:
+      - "sg-0ec28dc9115fa81eb"
+      Ipv6Prefixes: []
+      SubnetId: "subnet-044010fc8031c578d"
+      SourceDestCheck: true
+      InterfaceType: "interface"
+      Tags: []
+  CloudWatchAlarm00CPUUtilizationWarning00csWI2:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudWatch::Alarm"
+    DeletionPolicy: "Retain"
+    Properties:
+      ComparisonOperator: "GreaterThanThreshold"
+      TreatMissingData: "missing"
+      Dimensions:
+      - Value: "i-0509e7d63c6738bb3"
+        Name: "InstanceId"
+      Period: 300
+      EvaluationPeriods: 1
+      Namespace: "AWS/EC2"
+      OKActions: []
+      AlarmActions:
+      - "arn:aws:sns:eu-west-1:992382716453:aws-controltower-SecurityNotifications"
+      MetricName: "CPUUtilization"
+      ActionsEnabled: true
+      AlarmDescription: "Alert: High CPU utilization - ETL process may need optimization\
+        \ or scaling."
+      AlarmName: "CPU Utilization Warning"
+      Statistic: "Average"
+      InsufficientDataActions: []
+      DatapointsToAlarm: 1
+      Tags: []
+      Threshold: 80
+  CloudWatchAlarm00LambdaErrorsDetected00TuFSM:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudWatch::Alarm"
+    DeletionPolicy: "Retain"
+    Properties:
+      ComparisonOperator: "GreaterThanThreshold"
+      TreatMissingData: "missing"
+      Dimensions:
+      - Value:
+          Ref: "LambdaFunction00DataBaristas00hABOR"
+        Name: "FunctionName"
+      Period: 60
+      EvaluationPeriods: 1
+      Namespace: "AWS/Lambda"
+      OKActions: []
+      AlarmActions:
+      - "arn:aws:sns:eu-west-1:992382716453:aws-controltower-SecurityNotifications"
+      MetricName: "Errors"
+      ActionsEnabled: true
+      AlarmDescription: "Alert: Lambda function encountered errors more than 1 time\
+        \ in 5 minutes, indicating potential issues in execution."
+      AlarmName: "Lambda Errors Detected"
+      Statistic: "Average"
+      InsufficientDataActions: []
+      DatapointsToAlarm: 1
+      Tags: []
+      Threshold: 0
+  CloudWatchAlarm00LambdaExecutionDurationHigh00BkvHz:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudWatch::Alarm"
+    DeletionPolicy: "Retain"
+    Properties:
+      ComparisonOperator: "GreaterThanThreshold"
+      TreatMissingData: "missing"
+      Dimensions:
+      - Value:
+          Ref: "LambdaFunction00DataBaristas00hABOR"
+        Name: "FunctionName"
+      - Value:
+          Ref: "LambdaFunction00DataBaristas00hABOR"
+        Name: "Resource"
+      Period: 300
+      EvaluationPeriods: 1
+      Namespace: "AWS/Lambda"
+      OKActions: []
+      AlarmActions:
+      - "arn:aws:sns:eu-west-1:992382716453:aws-controltower-SecurityNotifications"
+      MetricName: "ConcurrentExecutions"
+      ActionsEnabled: true
+      AlarmDescription: "Alert: Lambda function execution duration exceeds 3 seconds\
+        \ on average, indicating potential performance issues."
+      AlarmName: "Lambda Execution Duration High"
+      Statistic: "Average"
+      InsufficientDataActions: []
+      DatapointsToAlarm: 1
+      Tags: []
+      Threshold: 3
+  EC2SecurityGroup00sg0ec28dc9115fa81eb00kTNwc:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::SecurityGroup"
+    DeletionPolicy: "Retain"
+    Properties:
+      GroupDescription: "Working data baristas Sec Group"
+      GroupName: "data-baristas-sgw"
+      VpcId: "vpc-09736265f09bd9a1b"
+      SecurityGroupIngress:
+      - CidrIp: "109.152.69.207/32"
+        IpProtocol: "tcp"
+        FromPort: 80
+        ToPort: 80
+      - CidrIp: "2.120.157.215/32"
+        IpProtocol: "tcp"
+        FromPort: 80
+        ToPort: 80
+      - CidrIp: "193.164.21.26/32"
+        IpProtocol: "tcp"
+        FromPort: 80
+        ToPort: 80
+      - CidrIp: "86.149.75.99/32"
+        IpProtocol: "tcp"
+        FromPort: 80
+        ToPort: 80
+      - CidrIp: "0.0.0.0/8"
+        IpProtocol: "tcp"
+        FromPort: 80
+        ToPort: 80
+      - CidrIp: "0.0.0.0/0"
+        IpProtocol: "tcp"
+        FromPort: 80
+        ToPort: 80
+      - CidrIp: "172.20.16.153/32"
+        IpProtocol: "tcp"
+        FromPort: 80
+        ToPort: 80
+      - CidrIp: "82.12.172.140/32"
+        IpProtocol: "tcp"
+        FromPort: 80
+        ToPort: 80
+      - CidrIp: "109.152.69.207/32"
+        IpProtocol: "tcp"
+        FromPort: 22
+        ToPort: 22
+      - CidrIp: "2.120.157.215/32"
+        IpProtocol: "tcp"
+        FromPort: 22
+        ToPort: 22
+      - CidrIp: "193.164.21.26/32"
+        IpProtocol: "tcp"
+        FromPort: 22
+        ToPort: 22
+      - CidrIp: "86.149.75.99/32"
+        IpProtocol: "tcp"
+        FromPort: 22
+        ToPort: 22
+      - CidrIp: "0.0.0.0/16"
+        IpProtocol: "tcp"
+        FromPort: 22
+        ToPort: 22
+      - CidrIp: "172.20.16.153/32"
+        IpProtocol: "tcp"
+        FromPort: 22
+        ToPort: 22
+      - CidrIp: "82.12.172.140/32"
+        IpProtocol: "tcp"
+        FromPort: 22
+        ToPort: 22
+      SecurityGroupEgress:
+      - CidrIp: "0.0.0.0/0"
+        IpProtocol: "-1"
+        FromPort: -1
+        ToPort: -1
+      Tags:
+      - Value: "Data Baristas"
+        Key: "Name"
+  LambdaFunction00DataBaristas00hABOR:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Lambda::Function"
+    DeletionPolicy: "Retain"
+    Properties:
+      MemorySize: 128
+      Description: ""
+      TracingConfig:
+        Mode: "PassThrough"
+      VpcConfig:
+        SecurityGroupIds:
+        - "sg-01e89bf9923cce8c1"
+        SubnetIds:
+        - "subnet-09d6ff273e2e93a9c"
+        Ipv6AllowedForDualStack: false
+      Timeout: 900
+      RuntimeManagementConfig:
+        UpdateRuntimeOn: "Auto"
+      Handler: "run.run"
+      Code:
+        S3Bucket:
+          Ref: "LambdaFunction00DataBaristas00hABORCodeS3BucketOneOfix04i"
+        S3Key:
+          Ref: "LambdaFunction00DataBaristas00hABORCodeS3KeyOneOfRfWIT"
+      Role: "arn:aws:iam::992382716453:role/lambda-execution-role"
+      FileSystemConfigs: []
+      FunctionName: "Data-Baristas"
+      Runtime: "python3.11"
+      PackageType: "Zip"
+      LoggingConfig:
+        LogFormat: "Text"
+        LogGroup: "/aws/lambda/Data-Baristas"
+      Environment:
+        Variables:
+          SSM_PARAMETER_NAME: "data_baristas_redshift_settings"
+      EphemeralStorage:
+        Size: 512
+      Layers:
+      - "arn:aws:lambda:eu-west-1:992382716453:layer:psycopg2:2"
+      Architectures:
+      - "x86_64"
+  S3Bucket00databaristas00rtHAa:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::S3::Bucket"
+    DeletionPolicy: "Retain"
+    Properties:
+      PublicAccessBlockConfiguration:
+        RestrictPublicBuckets: true
+        IgnorePublicAcls: true
+        BlockPublicPolicy: true
+        BlockPublicAcls: true
+      BucketName: "data-baristas"
+      OwnershipControls:
+        Rules:
+        - ObjectOwnership: "BucketOwnerEnforced"
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+        - BucketKeyEnabled: true
+          ServerSideEncryptionByDefault:
+            SSEAlgorithm: "AES256"
+  EC2Instance00i03f2a11c801d1360b00OIxs3:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::Instance"
+    DeletionPolicy: "Retain"
+    Properties:
+      Tenancy: "default"
+      SecurityGroups:
+      - "data-baristas-sgw"
+      PrivateIpAddress: "10.0.0.48"
+      UserData: "Q29udGVudC1UeXBlOiBtdWx0aXBhcnQvbWl4ZWQ7IGJvdW5kYXJ5PSIvLyIKTUlNRS1WZXJzaW9uOiAxLjAKCi0tLy8KQ29udGVudC1UeXBlOiB0ZXh0L2Nsb3VkLWNvbmZpZzsgY2hhcnNldD0idXMtYXNjaWkiCk1JTUUtVmVyc2lvbjogMS4wCkNvbnRlbnQtVHJhbnNmZXItRW5jb2Rpbmc6IDdiaXQKQ29udGVudC1EaXNwb3NpdGlvbjogYXR0YWNobWVudDsgZmlsZW5hbWU9ImNsb3VkLWNvbmZpZy50eHQiCgojY2xvdWQtY29uZmlnCmNsb3VkX2ZpbmFsX21vZHVsZXM6Ci0gW3NjcmlwdHMtdXNlciwgYWx3YXlzXQoKLS0vLwpDb250ZW50LVR5cGU6IHRleHQveC1zaGVsbHNjcmlwdDsgY2hhcnNldD0idXMtYXNjaWkiCk1JTUUtVmVyc2lvbjogMS4wCkNvbnRlbnQtVHJhbnNmZXItRW5jb2Rpbmc6IDdiaXQKQ29udGVudC1EaXNwb3NpdGlvbjogYXR0YWNobWVudDsgZmlsZW5hbWU9InVzZXJkYXRhLnR4dCIKCiMhL2Jpbi9iYXNoCnN1ZG8gZG9ja2VyIHJ1biAtZCAtcCA4MDozMDAwIC0tcm0gLS12b2x1bWUgZ3JhZmFuYS1zdG9yYWdlOi92YXIvbGliL2dyYWZhbmEgZ3JhZmFuYS9ncmFmYW5hCi0tLy8tLQ=="
+      BlockDeviceMappings:
+      - Ebs:
+          SnapshotId: "snap-07a7d30b747c24044"
+          VolumeType: "gp3"
+          KmsKeyId:
+            Fn::GetAtt:
+            - "KMSKey00eb0285482c184c01ab61b60160b5c8c200EN3x4"
+            - "Arn"
+          Encrypted: true
+          Iops: 3000
+          VolumeSize: 8
+          DeleteOnTermination: true
+        DeviceName: "/dev/xvda"
+      SubnetId: "subnet-044010fc8031c578d"
+      EbsOptimized: false
+      Volumes:
+      - VolumeId: "vol-0854a07ddb48c28aa"
+        Device: "/dev/xvda"
+      NetworkInterfaces:
+      - PrivateIpAddresses:
+        - PrivateIpAddress: "10.0.0.48"
+          Primary: true
+        SecondaryPrivateIpAddressCount: 0
+        DeviceIndex: "0"
+        GroupSet:
+        - Ref: "EC2SecurityGroup00sg0ec28dc9115fa81eb00kTNwc"
+        Ipv6Addresses: []
+        SubnetId: "subnet-044010fc8031c578d"
+        AssociatePublicIpAddress: true
+        NetworkInterfaceId:
+          Ref: "EC2NetworkInterface00eni011df1d560966200200aozyC"
+        DeleteOnTermination: true
+      ImageId: "ami-08ca6be1dc85b0e84"
+      InstanceType: "t2.micro"
+      Monitoring: true
+      Tags:
+      - Value: "data-baristas-ec2"
+        Key: "Name"
+      InstanceInitiatedShutdownBehavior: "stop"
+      CpuOptions:
+        ThreadsPerCore: 1
+        CoreCount: 1
+      AvailabilityZone: "eu-west-1a"
+      PrivateDnsNameOptions:
+        EnableResourceNameDnsARecord: false
+        HostnameType: "ip-name"
+        EnableResourceNameDnsAAAARecord: false
+      SecurityGroupIds:
+      - "sg-0ec28dc9115fa81eb"
+      DisableApiTermination: false
+      KeyName: "data-baristas-kp"
+      SourceDestCheck: true
+      PlacementGroupName: ""
+      VpcId: "vpc-09736265f09bd9a1b"
+      State:
+        Code: "16"
+        Name: "running"
+      CreditSpecification:
+        CPUCredits: "standard"
+  EC2Volume00vol0854a07ddb48c28aa00DnY1Y:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::Volume"
+    DeletionPolicy: "Retain"
+    Properties:
+      MultiAttachEnabled: false
+      SnapshotId: "snap-07a7d30b747c24044"
+      VolumeType: "gp3"
+      KmsKeyId: "arn:aws:kms:eu-west-1:992382716453:key/eb028548-2c18-4c01-ab61-b60160b5c8c2"
+      Encrypted: true
+      Size: 8
+      AutoEnableIO: true
+      AvailabilityZone: "eu-west-1a"
+      Throughput: 125
+      Iops: 3000
+      Tags: []
+  KMSKey00eb0285482c184c01ab61b60160b5c8c200EN3x4:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::KMS::Key"
+    DeletionPolicy: "Retain"
+    Properties:
+      Origin: "AWS_KMS"
+      MultiRegion: false
+      Description: "Default key that protects my EBS volumes when no other key is\
+        \ defined"
+      KeySpec: "SYMMETRIC_DEFAULT"
+      Enabled: true
+      KeyUsage: "ENCRYPT_DECRYPT"
+      Tags: []
+  CloudWatchAlarm00HighNetworkOutTraffic00wPUfq:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudWatch::Alarm"
+    DeletionPolicy: "Retain"
+    Properties:
+      ComparisonOperator: "GreaterThanThreshold"
+      TreatMissingData: "missing"
+      Dimensions:
+      - Value: "i-035c4f28bab8c9639"
+        Name: "InstanceId"
+      Period: 300
+      EvaluationPeriods: 1
+      Namespace: "AWS/EC2"
+      OKActions: []
+      AlarmActions:
+      - "arn:aws:sns:eu-west-1:992382716453:aws-controltower-SecurityNotifications"
+      MetricName: "NetworkOut"
+      ActionsEnabled: true
+      AlarmDescription: "Alert: Network Out traffic exceeding 1,000,000 bytes in 5\
+        \ minutes, indicating potential high outgoing data volume."
+      AlarmName: "High Network Out Traffic"
+      Statistic: "Average"
+      InsufficientDataActions: []
+      DatapointsToAlarm: 1
+      Tags: []
+      Threshold: 1000000
+  EC2VolumeAttachment00vol0854a07ddb48c28aa00oYc3p:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::VolumeAttachment"
+    DeletionPolicy: "Retain"
+    Properties:
+      InstanceId: "i-03f2a11c801d1360b"
+      VolumeId: "vol-0854a07ddb48c28aa"
+      Device: "/dev/xvda"
+  CloudWatchAlarm00HighNetworkInTraffic00sH1cB:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudWatch::Alarm"
+    DeletionPolicy: "Retain"
+    Properties:
+      ComparisonOperator: "GreaterThanThreshold"
+      TreatMissingData: "missing"
+      Dimensions:
+      - Value: "i-0c694d173c4097226"
+        Name: "InstanceId"
+      Period: 300
+      EvaluationPeriods: 1
+      Namespace: "AWS/EC2"
+      OKActions: []
+      AlarmActions:
+      - "arn:aws:sns:eu-west-1:992382716453:aws-controltower-SecurityNotifications"
+      MetricName: "NetworkIn"
+      ActionsEnabled: true
+      AlarmDescription: "Alert: Network In traffic exceeding 1,000,000 bytes in 5\
+        \ minutes, indicating potential high incoming data volume."
+      AlarmName: "High Network In Traffic"
+      Statistic: "Average"
+      InsufficientDataActions: []
+      DatapointsToAlarm: 1
+      Tags: []
+      Threshold: 1000000
+  S3Bucket00databaristaslambdabucket0083z5b:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::S3::Bucket"
+    DeletionPolicy: "Retain"
+    Properties:
+      PublicAccessBlockConfiguration:
+        RestrictPublicBuckets: true
+        IgnorePublicAcls: true
+        BlockPublicPolicy: true
+        BlockPublicAcls: true
+      BucketName: "data-baristas-lambda-bucket"
+      OwnershipControls:
+        Rules:
+        - ObjectOwnership: "BucketOwnerEnforced"
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+        - BucketKeyEnabled: true
+          ServerSideEncryptionByDefault:
+            SSEAlgorithm: "AES256"
+  CloudWatchAlarm00DiskReadWarning009xCYk:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudWatch::Alarm"
+    DeletionPolicy: "Retain"
+    Properties:
+      ComparisonOperator: "GreaterThanThreshold"
+      TreatMissingData: "missing"
+      Dimensions:
+      - Value: "i-088d4b2ef2d6eb004"
+        Name: "InstanceId"
+      Period: 300
+      EvaluationPeriods: 1
+      Namespace: "AWS/EC2"
+      OKActions: []
+      AlarmActions:
+      - "arn:aws:sns:eu-west-1:992382716453:aws-controltower-SecurityNotifications"
+      MetricName: "DiskReadOps"
+      ActionsEnabled: true
+      AlarmDescription: "Alert: High Disk Read Operations exceeding 1000 ops in 5\
+        \ minutes, indicating potential I/O bottlenecks."
+      AlarmName: "Disk Read Warning"
+      Statistic: "Average"
+      InsufficientDataActions: []
+      DatapointsToAlarm: 1
+      Tags: []
+      Threshold: 1000
