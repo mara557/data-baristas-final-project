@@ -21,7 +21,7 @@ Software written in Python to Extract, Transform, Load, and Analyze data in AWS 
 
 ## Project Background
 
-This project uses Python running on AWS Lambda to extract data from an S3 bucket, transform it within the Lambda, and load the data into Redshift using SQS with a different Lambda. The data is then analyzed on an EC2 instance to provide insights, and CloudWatch information is visualized using Grafana.
+This project uses Python running on AWS Lambda to extract data from an S3 bucket, transform it within the Lambda, and load the data into Redshift. The data is then analysed on an Grafana to provide insights.
 
 We started by building a local proof of concept in Visual Studio Code with Python scripts, Docker, and Adminer for database management, and then integrated it into AWS.
 
