@@ -32,6 +32,11 @@ After validating our approach with the PoC, we transitioned the entire project t
 
 This section is reserved for adding screenshots of the Grafana dashboards and visualizations we created as part of this project. These visuals illustrate the insights we were able to draw from the processed data, highlighting trends, patterns, and other key metrics for the café chain.
 
+![Screenshot](grafana/1.png)
+![Screenshot](grafana/2.png)
+![Screenshot](grafana/3.png)
+![Screenshot](grafana/4.png)
+
 ## Authors
 
 - [@b-the-bee - Sam B](https://github.com/b-the-bee)
